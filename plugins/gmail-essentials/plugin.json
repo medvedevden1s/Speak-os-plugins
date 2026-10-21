@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schema/plugin.schema.json",
+  "format": 1,
+  "id": "gmail-essentials",
+  "name": "Gmail Essentials",
+  "version": "1.0.0",
+  "description": "The everyday email skills: catch up on your inbox, find a message, draft a reply, and send an email by voice.",
+  "apps": ["gmail"],
+  "actions": {
+    "read": ["GMAIL_FETCH_EMAILS", "GMAIL_FETCH_MESSAGE_BY_THREAD_ID", "GMAIL_SEARCH_PEOPLE"],
+    "write": ["GMAIL_CREATE_EMAIL_DRAFT", "GMAIL_SEND_EMAIL", "GMAIL_REPLY_TO_THREAD"]
+  },
+  "author": { "name": "Speak OS", "github": "medvedevden1s" },
+  "license": "MIT",
+  "category": "communication",
+  "keywords": ["email", "inbox", "gmail"]
+}

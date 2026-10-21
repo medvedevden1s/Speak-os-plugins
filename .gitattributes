@@ -1,0 +1,4 @@
+# Every file is text, checked out with LF on every OS. The catalog's sha256 for a
+# plugin is computed over these bytes, so a CRLF checkout on Windows must not
+# change the hash the app verifies against.
+* text=auto eol=lf

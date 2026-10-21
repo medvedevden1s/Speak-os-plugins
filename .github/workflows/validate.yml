@@ -1,0 +1,44 @@
+name: Validate plugins
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Format, safety and version checks
+        run: node scripts/validate.mjs ${{ github.event_name == 'pull_request' && format('--base origin/{0}', github.base_ref) || '' }}
+      - name: Build the catalog
+        run: node scripts/build-catalog.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalog
+          path: catalog.json
+
+  # Needs the catalog API key, which GitHub does not give to pull requests from
+  # forks. A maintainer re-runs it on those before merging.
+  check-actions:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Every declared action exists in the live catalog
+        run: node scripts/check-actions.mjs
+        env:
+          CATALOG_API_URL: ${{ vars.CATALOG_API_URL }}
+          CATALOG_API_KEY: ${{ secrets.CATALOG_API_KEY }}

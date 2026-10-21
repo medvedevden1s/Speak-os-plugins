@@ -1,0 +1,9 @@
+{
+  "id": "morning-inbox-digest",
+  "name": "Morning inbox digest",
+  "description": "A short summary of what arrived overnight and what needs a reply today.",
+  "instructions": "Fetch the unread messages that arrived in the inbox in the last 16 hours (Gmail query `is:unread in:inbox newer_than:16h`), at most 40. Write a digest with three short sections: 1) Needs a reply today: one line per message (sender, subject, what they want). 2) Worth reading: one line each. 3) Everything else: one sentence with counts (newsletters, receipts, notifications). If the inbox is empty, say so in one line. Only read; never reply, archive or mark anything as read.",
+  "apps": ["gmail"],
+  "actions": ["GMAIL_FETCH_EMAILS"],
+  "triggers": ["morning digest", "what came in overnight"]
+}

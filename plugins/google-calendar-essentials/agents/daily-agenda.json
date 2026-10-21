@@ -1,0 +1,9 @@
+{
+  "id": "daily-agenda",
+  "name": "Daily agenda",
+  "description": "Your day in a few lines: meetings, free gaps, and what needs preparation.",
+  "instructions": "List today's events on the primary calendar in the user's time zone, in time order, one line each (\"10:00–10:30 Weekly sync\"). Then add: the longest free gap of the day, any back-to-back stretch longer than two hours, and any event whose description mentions an agenda, a document or a deadline (name it as something to prepare). If there are no events, say the day is free. Only read; never create, move or delete events.",
+  "apps": ["googlecalendar"],
+  "actions": ["GOOGLECALENDAR_EVENTS_LIST"],
+  "triggers": ["daily agenda", "plan my day"]
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/medvedevden1s/Speak-os-plugins/blob/main/schema/plugin.schema.json",
+  "title": "Speak OS plugin manifest (plugin.json)",
+  "description": "Editor help only. scripts/validate.mjs is the authority and checks more than this schema can (skills, agents, sizes, safety).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "id", "name", "version", "description", "apps", "actions", "author", "license"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "format": { "const": 1, "description": "Plugin format version. Always 1 for now." },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$",
+      "description": "Unique id, same as the folder name. Never changes once published."
+    },
+    "name": { "type": "string", "minLength": 1, "maxLength": 60 },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "description": "Bump it on every change. A version that adds write actions asks users again."
+    },
+    "description": { "type": "string", "minLength": 1, "maxLength": 280 },
+    "apps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$" },
+      "description": "App ids the plugin works with, e.g. gmail, googlecalendar, slack."
+    },
+    "actions": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Every app action any skill or agent may use. Read actions only look; write actions change something. Users see this list before installing.",
+      "properties": {
+        "read": { "$ref": "#/$defs/actionList" },
+        "write": { "$ref": "#/$defs/actionList" }
+      }
+    },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "github": { "type": "string", "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$" }
+      }
+    },
+    "license": { "const": "MIT" },
+    "category": {
+      "enum": ["productivity", "communication", "calendar", "sales", "marketing", "support", "developer", "finance", "other"]
+    },
+    "keywords": { "type": "array", "maxItems": 8, "items": { "type": "string", "maxLength": 30 } },
+    "minAppVersion": { "type": "string", "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$" }
+  },
+  "$defs": {
+    "actionList": {
+      "type": "array",
+      "maxItems": 40,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[A-Z0-9][A-Z0-9_]{1,127}$" }
+    }
+  }
+}

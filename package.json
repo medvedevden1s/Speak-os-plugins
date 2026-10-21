@@ -1,0 +1,15 @@
+{
+  "name": "speakos-plugins",
+  "private": true,
+  "description": "Community plugins for Speak OS: skills and agent templates for the apps it connects to.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "check-actions": "node scripts/check-actions.mjs",
+    "catalog": "node scripts/build-catalog.mjs"
+  }
+}

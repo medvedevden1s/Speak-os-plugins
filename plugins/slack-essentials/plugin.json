@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schema/plugin.schema.json",
+  "format": 1,
+  "id": "slack-essentials",
+  "name": "Slack Essentials",
+  "version": "1.0.0",
+  "description": "Catch up on a channel, find a message, send a message and set a reminder in Slack by voice.",
+  "apps": ["slack"],
+  "actions": {
+    "read": ["SLACK_FIND_CHANNELS", "SLACK_FIND_USERS", "SLACK_FETCH_CONVERSATION_HISTORY", "SLACK_SEARCH_MESSAGES"],
+    "write": ["SLACK_SEND_MESSAGE", "SLACK_CREATE_A_REMINDER"]
+  },
+  "author": { "name": "Speak OS", "github": "medvedevden1s" },
+  "license": "MIT",
+  "category": "communication",
+  "keywords": ["slack", "chat", "team"]
+}
